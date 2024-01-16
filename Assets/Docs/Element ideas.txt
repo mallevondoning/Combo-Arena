@@ -1,0 +1,12 @@
+fire
+lighting
+ice
+light
+shadow
+gear
+sword
+spear
+wind
+sand
+toys
+food
