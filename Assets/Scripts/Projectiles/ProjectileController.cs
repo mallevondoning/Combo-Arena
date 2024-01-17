@@ -9,7 +9,6 @@ public class ProjectileController : MonoBehaviour
 
     private Transform[] _sizeObject = new Transform[3];
     private Vector3 _dir;
-    private int _id;
 
     public void Init(Vector3 dir)
     {
@@ -45,14 +44,12 @@ public class ProjectileController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.velocity = Velocity(_rb, _dir, _projectileData);
+        if (_rb.velocity.magnitude <= 0) _rb.velocity = Velocity(_rb, _dir, _projectileData);
     }
 
     private Vector3 Velocity(Rigidbody rb, Vector3 dir, Projectile projectileData)
     {
-        Vector3 finalDir = dir.normalized * projectileData.Speed;
-        finalDir.y = rb.velocity.y;
-        return finalDir;
+        return dir.normalized * projectileData.Speed;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -69,11 +66,6 @@ public class ProjectileController : MonoBehaviour
         if (hitGroundEvent == collisionMask) _projectileData.HitGround.Invoke();
         else if (hitEnemyEvent != null) _projectileData.HitEnemy.Invoke();
         else if (hitBulletEvent != null) _projectileData.HitBullet.Invoke();
-    }
-
-    public int GetID()
-    {
-        return _id;
     }
 
     public void DestroySelf()
