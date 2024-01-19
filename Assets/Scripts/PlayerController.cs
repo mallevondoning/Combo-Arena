@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
             {
                 //<make> swap to next step
                 ProjectileController projectile = Instantiate(_bullet, _muzzle);
+                Debug.Log(projectile.GetHashCode());
                
                 if (projectile != null)
                 {
@@ -86,8 +87,8 @@ public class PlayerController : MonoBehaviour
         yRot -= mouseY;
         yRot = Mathf.Clamp(yRot, -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(0, xRot, 0);
-        _playerCamera.rotation = Quaternion.Euler(yRot, transform.rotation.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Euler(0, xRot, 0); //<-- some wierd unity bug/system problem
+        _playerCamera.rotation = Quaternion.Euler(yRot, transform.rotation.eulerAngles.y, 0); //<-- some wierd unity bug/system problem
     }
 
     private string DebugCombo(ElementType[] ComboList)

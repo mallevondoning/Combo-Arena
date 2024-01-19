@@ -10,8 +10,9 @@ public class Projectile : ScriptableObject
     public ElementType ElementType = ElementType.NoneID;
     public ProjectileSize ProjectileSize = ProjectileSize.NoneID;
     public BulletTeam BulletTeam = BulletTeam.NoneID;
-    
+
     [Header("UnityEvents")]
+    public UnityEvent CreateBullet = new UnityEvent();
     public UnityEvent HitGround = new UnityEvent();
     public UnityEvent HitEnemy = new UnityEvent();
     public UnityEvent HitBullet = new UnityEvent();
@@ -28,6 +29,7 @@ public class Projectile : ScriptableObject
 
     public void Init(ProjectileController projectileCtrl)
     {
+        CreateBullet.AddListener(CreateBulletFunc);
         HitGround.AddListener(HitGroundFunc);
         HitEnemy.AddListener(HitEnemyFunc);
         HitBullet.AddListener(HitBulletFunc);
@@ -35,6 +37,9 @@ public class Projectile : ScriptableObject
         _projectileCtrl = projectileCtrl;
     }
 
+    protected virtual void CreateBulletFunc()
+    {
+    }
     protected virtual void HitGroundFunc()
     {
     }
@@ -44,6 +49,8 @@ public class Projectile : ScriptableObject
     protected virtual void HitBulletFunc()
     {
     }
+
+
 
     //<bug> only delets the newest bullet
     public void DestroyBullet()

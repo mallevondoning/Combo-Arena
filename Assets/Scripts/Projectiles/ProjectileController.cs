@@ -17,6 +17,8 @@ public class ProjectileController : MonoBehaviour
 
     private void Awake()
     {
+        _projectileData.CreateBullet.Invoke();
+
         for (int i = 0; i < transform.childCount; i++) _sizeObject[i] = transform.GetChild(i);
 
         switch (_projectileData.ProjectileSize)
@@ -44,10 +46,10 @@ public class ProjectileController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_rb.velocity.magnitude <= 0) _rb.velocity = Velocity(_rb, _dir, _projectileData);
+        if (_rb.velocity.magnitude <= 0) _rb.velocity = Velocity(_dir, _projectileData);
     }
 
-    private Vector3 Velocity(Rigidbody rb, Vector3 dir, Projectile projectileData)
+    private Vector3 Velocity( Vector3 dir, Projectile projectileData)
     {
         return dir.normalized * projectileData.Speed;
     }
