@@ -25,3 +25,11 @@ public enum BulletTeam
     Hostile = 2,
     Neutral = 3,
 }
+
+public enum Hand
+{
+    NoneID = 0,
+    Right = 1,
+    Left = 2,
+    Middle = 3,
+}
