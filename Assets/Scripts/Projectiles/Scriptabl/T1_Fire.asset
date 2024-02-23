@@ -12,30 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1303ccd2bdde3a6488edc3b8aac3dcb7, type: 3}
   m_Name: T1_Fire
   m_EditorClassIdentifier: 
-  ElementType: 1
+  InflictElementList: 01000000
   ProjectileSize: 1
   BulletTeam: 1
+  CreateBullet:
+    m_PersistentCalls:
+      m_Calls: []
   HitGround:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_TargetAssemblyTypeName: Projectile, Assembly-CSharp
-        m_MethodName: DestroyBullet
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+    DestroyOnContact: 1
+    ModfilerEvent:
+      m_PersistentCalls:
+        m_Calls: []
   HitEnemy:
-    m_PersistentCalls:
-      m_Calls: []
+    DestroyOnContact: 1
+    ModfilerEvent:
+      m_PersistentCalls:
+        m_Calls: []
   HitBullet:
-    m_PersistentCalls:
-      m_Calls: []
+    DestroyOnContact: 0
+    ModfilerEvent:
+      m_PersistentCalls:
+        m_Calls: []
   Damage: 10
   Speed: 15
   UseGravity: 0

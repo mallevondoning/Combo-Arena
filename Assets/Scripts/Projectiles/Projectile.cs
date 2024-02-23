@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using Unity.VisualScripting;
 
 [CreateAssetMenu(menuName = "Game/World/Projectile")]
 public class Projectile : ScriptableObject
 {
     [Header("Enum")]
-    public ElementType ElementType = ElementType.NoneID;
+    public List<ElementType> InflictElementList = new List<ElementType>();
     public ProjectileSize ProjectileSize = ProjectileSize.NoneID;
     public BulletTeam BulletTeam = BulletTeam.NoneID;
 
-    [Header("UnityEvents")]
+    [Header("UnityEvents")] //<-- change to a tag system
     public UnityEvent CreateBullet = new UnityEvent();
-    public UnityEvent HitGround = new UnityEvent();
-    public UnityEvent HitEnemy = new UnityEvent();
-    public UnityEvent HitBullet = new UnityEvent();
+    public ProjectileModifier HitGround = new ProjectileModifier();
+    public ProjectileModifier HitEnemy = new ProjectileModifier();
+    public ProjectileModifier HitBullet = new ProjectileModifier();
 
     [Header("Basic")]
     public float Damage = 10;
@@ -30,9 +31,9 @@ public class Projectile : ScriptableObject
     public void Init(ProjectileController projectileCtrl)
     {
         CreateBullet.AddListener(CreateBulletFunc);
-        HitGround.AddListener(HitGroundFunc);
-        HitEnemy.AddListener(HitEnemyFunc);
-        HitBullet.AddListener(HitBulletFunc);
+        HitGround.ModfilerEvent.AddListener(HitGroundFunc);
+        HitEnemy.ModfilerEvent.AddListener(HitEnemyFunc);
+        HitBullet.ModfilerEvent.AddListener(HitBulletFunc);
 
         _projectileCtrl = projectileCtrl;
     }
@@ -49,13 +50,4 @@ public class Projectile : ScriptableObject
     protected virtual void HitBulletFunc()
     {
     }
-
-
-
-    //<bug> only delets the newest bullet
-    public void DestroyBullet()
-    {
-        if (_projectileCtrl != null) _projectileCtrl.DestroySelf();
-    }
-    //</bug>
 }

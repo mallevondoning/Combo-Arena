@@ -54,24 +54,31 @@ public class ProjectileController : MonoBehaviour
         return dir.normalized * projectileData.Speed;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         int hitGroundEvent = LayerMask.NameToLayer("Ground");
-
-        //<update> could change to empty script
-        EnemyController hitEnemyEvent = collision.gameObject.GetComponent<EnemyController>();
-        ProjectileController hitBulletEvent = collision.gameObject.GetComponent<ProjectileController>();
-        //</update>
-
         int collisionMask = collision.gameObject.layer;
 
-        if (hitGroundEvent == collisionMask) _projectileData.HitGround.Invoke();
-        else if (hitEnemyEvent != null) _projectileData.HitEnemy.Invoke();
-        else if (hitBulletEvent != null) _projectileData.HitBullet.Invoke();
-    }
+        EnemyController hitEnemyEvent = collision.gameObject.GetComponent<EnemyController>();
+        ProjectileController hitBulletEvent = collision.gameObject.GetComponent<ProjectileController>();
 
-    public void DestroySelf()
-    {
-        Destroy(gameObject);
+        bool destroyCheck = false;
+        if (hitGroundEvent == collisionMask)
+        {
+            _projectileData.HitGround.ModfilerEvent.Invoke(); 
+            destroyCheck = _projectileData.HitGround.DestroyOnContact;
+        }
+        else if (hitEnemyEvent != null)
+        {
+            _projectileData.HitEnemy.ModfilerEvent.Invoke();
+            destroyCheck = _projectileData.HitEnemy.DestroyOnContact;
+        }
+        else if (hitBulletEvent != null)
+        {
+            _projectileData.HitBullet.ModfilerEvent.Invoke();
+            destroyCheck = _projectileData.HitBullet.DestroyOnContact;
+        }
+
+        if (destroyCheck) Destroy(gameObject); /*<--- Give more context*/
     }
 }
