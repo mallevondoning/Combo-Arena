@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngineInternal;
 
 [CreateAssetMenu(menuName = "Game/Data/Projectile")]
 public class ElementComboContens : ScriptableObject
 {
-    public AnimationClip Animation; //<--- switch to right information
+    [Header("Combo")]
     public ElementType[] ElementCombo = { ElementType.NoneID, ElementType.NoneID, ElementType.NoneID };
+    [Header("Animation")]
+    public AnimationClip Animation; //<--- switch to right information
+    [Range(0,1)][Tooltip("Spawns the projectile comparetly to the ainmation. 0 is the start of the animation, 1 is the end of the animation.")] public float WhenToSpawn = 1f;
+    [Header("Projectile contens")]
     public List<ProjectileContens> Contens;
 
     private void OnValidate()

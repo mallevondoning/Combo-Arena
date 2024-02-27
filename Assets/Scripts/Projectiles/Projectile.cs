@@ -26,16 +26,12 @@ public class Projectile : ScriptableObject
     public bool HasKnockback = false;
     public float KnockbackForce = 0;
 
-    private ProjectileController _projectileCtrl;
-
-    public void Init(ProjectileController projectileCtrl)
+    public void Init()
     {
         CreateBullet.AddListener(CreateBulletFunc);
         HitGround.ModfilerEvent.AddListener(HitGroundFunc);
         HitEnemy.ModfilerEvent.AddListener(HitEnemyFunc);
         HitBullet.ModfilerEvent.AddListener(HitBulletFunc);
-
-        _projectileCtrl = projectileCtrl;
     }
 
     protected virtual void CreateBulletFunc()

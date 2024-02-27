@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1303ccd2bdde3a6488edc3b8aac3dcb7, type: 3}
-  m_Name: T1_Fire
+  m_Name: T1_Ice
   m_EditorClassIdentifier: 
   InflictElementList: 01000000
   ProjectileSize: 1

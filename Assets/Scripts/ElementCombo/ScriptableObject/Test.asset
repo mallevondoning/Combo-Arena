@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d857a5a79982444b19015c8881ac67, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  Animation: {fileID: 7400000, guid: 5dc5894f00a3e364b924557ac5342306, type: 2}
+  ElementCombo: 030000000000000000000000
+  Animation: {fileID: 0}
+  SpawnAfterAnimation: 1
   Contens:
-  - Projectile: {fileID: 11400000, guid: e2d0ab278cf3e8445992eb7ccef22462, type: 2}
+  - Projectile: {fileID: 1441847678670431627, guid: f175aad44ef3d824f93cd4c58e550994,
+      type: 3}
     Hand: 3
     Amount: 2
     DelayTimerInSec: 0.2

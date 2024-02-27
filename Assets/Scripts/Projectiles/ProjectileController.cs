@@ -37,21 +37,19 @@ public class ProjectileController : MonoBehaviour
                 break;
         }
 
-        _projectileData.Init(this);
+        _projectileData.Init();
 
         _rb.useGravity = _projectileData.UseGravity;
-
-        //_dir = Vector3.forward; //<--- remove
     }
 
     private void FixedUpdate()
     {
-        if (_rb.velocity.magnitude <= 0) _rb.velocity = Velocity(_dir, _projectileData);
+        if (_rb.velocity.magnitude <= 0) _rb.velocity = Velocity(_dir, _projectileData.Speed);
     }
 
-    private Vector3 Velocity( Vector3 dir, Projectile projectileData)
+    private Vector3 Velocity(Vector3 dir, float speed)
     {
-        return dir.normalized * projectileData.Speed;
+        return dir.normalized * speed;
     }
 
     private void OnTriggerEnter(Collider collision)
