@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13d857a5a79982444b19015c8881ac67, type: 3}
-  m_Name: Test
+  m_Name: Ice
   m_EditorClassIdentifier: 
   ElementCombo: 030000000000000000000000
   Animation: {fileID: 0}
-  SpawnAfterAnimation: 1
+  WhenToSpawn: 1
   Contens:
   - Projectile: {fileID: 1441847678670431627, guid: f175aad44ef3d824f93cd4c58e550994,
       type: 3}

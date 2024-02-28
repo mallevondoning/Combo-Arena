@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3406254974085611102}
   - component: {fileID: 6455383969889863146}
   - component: {fileID: 4205837941790367496}
-  - component: {fileID: 9202198078057544300}
+  - component: {fileID: 2795307431645510416}
   - component: {fileID: 4677292676367957474}
   m_Layer: 0
   m_Name: Player
@@ -110,7 +110,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9202198078057544300
+--- !u!114 &2795307431645510416
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,11 +119,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4145675879677797512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57411ce2a262f2d4aba7113cb500ae8d, type: 3}
+  m_Script: {fileID: 11500000, guid: aafec2ab9dc021947a5f251dfb9eb4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCamera: {fileID: 604601708606049103}
-  _bullet: {fileID: 4038186686080998610, guid: f175aad44ef3d824f93cd4c58e550994, type: 3}
+  _bullet: {fileID: 0}
   _muzzleList:
   - {fileID: 3589037422406976305}
   - {fileID: 7755190423041550477}

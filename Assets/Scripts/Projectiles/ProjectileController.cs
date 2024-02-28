@@ -8,17 +8,9 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] private Rigidbody _rb;
 
     private Transform[] _sizeObject = new Transform[3];
-    private Vector3 _dir;
-
-    public void Init(Vector3 dir)
-    {
-        _dir = dir;
-    }
 
     private void Awake()
     {
-        _projectileData.CreateBullet.Invoke();
-
         for (int i = 0; i < transform.childCount; i++) _sizeObject[i] = transform.GetChild(i);
 
         switch (_projectileData.ProjectileSize)
@@ -39,17 +31,18 @@ public class ProjectileController : MonoBehaviour
 
         _projectileData.Init();
 
+        _projectileData.CreateBullet.Invoke();
         _rb.useGravity = _projectileData.UseGravity;
     }
 
     private void FixedUpdate()
     {
-        if (_rb.velocity.magnitude <= 0) _rb.velocity = Velocity(_dir, _projectileData.Speed);
+        if (_rb.velocity.magnitude <= 0) _rb.velocity = Velocity(_projectileData.Speed);
     }
 
-    private Vector3 Velocity(Vector3 dir, float speed)
+    private Vector3 Velocity(float speed)
     {
-        return dir.normalized * speed;
+        return transform.forward * speed;
     }
 
     private void OnTriggerEnter(Collider collision)

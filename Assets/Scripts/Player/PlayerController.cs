@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,9 +16,13 @@ public class PlayerController : MonoBehaviour
     private float xRot;
     private float yRot;
 
-    [SerializeField] private float sensitivity = 100f;
+    //<update> move to option
+    [SerializeField] private float sensitivity = 150f;
     private float senX;
     private float senY;
+    //</update>
+
+    private bool _isCoActive = false;
 
     [SerializeField] private bool _centerScreen = false;
 
@@ -46,34 +49,23 @@ public class PlayerController : MonoBehaviour
             Array.Fill(DataManager.ComboList, ElementType.NoneID);
         }
 
+        //<update> make this more general
         if (Input.GetKeyDown(KeyCode.Q)) DataManager.ComboList[_listPos - 1] = ElementType.fire;
         if (Input.GetKeyDown(KeyCode.E)) DataManager.ComboList[_listPos - 1] = ElementType.lighting;
         if (Input.GetMouseButtonDown(1)) DataManager.ComboList[_listPos - 1] = ElementType.ice;
+        //</update>
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !_isCoActive)
         {
             if (DataManager.ComboList[0] != ElementType.NoneID)
             {
-                //finds the right file name
+                //Finds the Element combo
                 ElementComboContens elementComboContens = FindElementComboContens();
 
-                //<make> swap to next step
-                ProjectileController projectile = Instantiate(_bullet, _muzzleList[0]);
-               
-                if (projectile != null)
-                {
-                    projectile.Init(_playerCamera.forward);
-                    projectile.gameObject.transform.parent.DetachChildren(); //<== something feels wrong
-                }
-                else Debug.LogError("no ProjectileController");
-
-                //Debug.Log(DebugCombo(DataManager.ComboList));
-                //</make>
+                if (!_isCoActive && elementComboContens != null) StartCoroutine(BulletCoroutine(elementComboContens));
+                else Debug.LogError(DebugCombo() + " does not exsist");
             }
-            else
-            {
-                Debug.Log("No element has selected");
-            }
+            else Debug.Log("No element has selected");
 
             _listPos = 0;
             Array.Fill(DataManager.ComboList, ElementType.NoneID);
@@ -82,6 +74,7 @@ public class PlayerController : MonoBehaviour
         MoveCamera();
     }
 
+    //move to locomotion script
     private void MoveCamera()
     {
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * senX;
@@ -127,48 +120,55 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator BulletCoroutine(ElementComboContens ECC)
     {
+        _isCoActive = true;
+
         if (ECC.Animation != null && !ECC.Animation.empty)
         {
             _anim.Play(ECC.Animation.name);
-            yield return new WaitForSeconds(Mathf.Lerp(0, ECC.Animation.length, ECC.WhenToSpawn)); //<== swap for after animation instead of length
+            yield return new WaitForSeconds(Mathf.Lerp(0, ECC.Animation.length, ECC.WhenToSpawn));
         }
 
         for (int i = 0; i < ECC.Contens.Count; i++)
         {
+            if (ECC.Contens[i].Projectile == null) break;
+
             for (int o = 0; o < ECC.Contens[i].Amount; o++)
             {
                 ProjectileController projectile = ECC.Contens[i].Projectile.GetComponent<ProjectileController>();
-                Instantiate(ECC.Contens[i].Projectile, _muzzleList[(int)ECC.Contens[i].Hand-1]);
 
-                projectile.Init(_playerCamera.forward);
-                projectile.gameObject.transform.parent.DetachChildren();
+                Instantiate(projectile, _muzzleList[(int)ECC.Contens[i].Hand - 1].position, Quaternion.LookRotation(_playerCamera.forward));
 
                 yield return new WaitForSeconds(ECC.Contens[i].DelayTimerInSec);
             }
         }
 
+        _isCoActive = false;
         yield return null;
     }
 
-    private string DebugCombo(ElementType[] ComboList)
+    private string DebugCombo()
     {
-        string combo = "";
+        string combo = "\"";
         for (int i = 0; i < DataManager.ComboList.Length; i++)
         {
             switch (DataManager.ComboList[i])
             {
                 case ElementType.fire:
-                    combo += "F";
+                    combo += "Fire";
                     break;
                 case ElementType.lighting:
-                    combo += "L";
+                    combo += "Lighting";
                     break;
                 case ElementType.ice:
-                    combo += "I";
+                    combo += "Ice";
+                    break;
+                case ElementType.NoneID:
                     break;
             }
-            combo += " ";
+            if (DataManager.ComboList[i] != ElementType.NoneID && i < DataManager.ComboList.Length-1) combo += ", ";
         }
+        combo = combo.Remove(combo.Length-2, 2);
+        combo += "\"";
         return combo;
     }
 }

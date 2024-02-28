@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1303ccd2bdde3a6488edc3b8aac3dcb7, type: 3}
+  m_Name: T1_fire
+  m_EditorClassIdentifier: 
+  InflictElementList: 01000000
+  ProjectileSize: 3
+  BulletTeam: 1
+  CreateBullet:
+    m_PersistentCalls:
+      m_Calls: []
+  HitGround:
+    DestroyOnContact: 1
+    ModfilerEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  HitEnemy:
+    DestroyOnContact: 1
+    ModfilerEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  HitBullet:
+    DestroyOnContact: 0
+    ModfilerEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  Damage: 10
+  Speed: 25
+  UseGravity: 1
+  HasKnockback: 0
+  KnockbackForce: 0
