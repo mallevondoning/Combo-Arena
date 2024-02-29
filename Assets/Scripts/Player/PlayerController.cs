@@ -1,42 +1,45 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Transform _playerCamera;
+    [SerializeField] private Rigidbody _playerRigidbody;
 
-    [SerializeField] private ProjectileController _bullet; //<== remove
     [SerializeField] private List<Transform> _muzzleList;
     [SerializeField] private Animation _anim;
 
+    private Locomation _locomation = new Locomation();
+
     private int _listPos = 0;
 
-    private float xRot;
-    private float yRot;
+    private float moveX;
+    private float moveZ;
+    private float speed = 15f;
 
     //<update> move to option
-    [SerializeField] private float sensitivity = 150f;
+    [SerializeField] private float sensitivity = 600f;
     private float senX;
     private float senY;
     //</update>
 
     private bool _isCoActive = false;
 
-    [SerializeField] private bool _centerScreen = false;
-
     private void Awake()
     {
         Array.Fill(DataManager.ComboList, ElementType.NoneID);
 
-        senX = senY = sensitivity; //<--- fix so separate
+        senX = senY = sensitivity;
+        DataManager.Sensitvity = sensitivity;
+        DataManager.senX = senX;
+        DataManager.senY = senY;
 
-        if (_centerScreen)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
@@ -60,32 +63,27 @@ public class PlayerController : MonoBehaviour
             if (DataManager.ComboList[0] != ElementType.NoneID)
             {
                 //Finds the Element combo
-                ElementComboContens elementComboContens = FindElementComboContens();
+                ElementComboContens elementCombo = FindElementComboContens();
 
-                if (!_isCoActive && elementComboContens != null) StartCoroutine(BulletCoroutine(elementComboContens));
-                else Debug.LogError(DebugCombo() + " does not exsist");
+                if (!_isCoActive && elementCombo != null) StartCoroutine(BulletCoroutine(elementCombo));
+                else Debug.LogError(DebugCombo() + " does not exsist in manager");
             }
             else Debug.Log("No element has selected");
 
             _listPos = 0;
             Array.Fill(DataManager.ComboList, ElementType.NoneID);
         }
-
-        MoveCamera();
     }
 
-    //move to locomotion script
-    private void MoveCamera()
+    private void FixedUpdate()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * senX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * senY;
+        moveX = Input.GetAxisRaw("Horizontal");
+        moveZ = Input.GetAxisRaw("Vertical");
+        Vector3 dir = transform.forward * moveZ + transform.right * moveX;
 
-        xRot += mouseX;
-        yRot -= mouseY;
-        yRot = Mathf.Clamp(yRot, -90f, 90f);
-
-        transform.rotation = Quaternion.Euler(0, xRot, 0); //<-- some wierd unity bug/system problem
-        _playerCamera.rotation = Quaternion.Euler(yRot, transform.rotation.eulerAngles.y, 0); //<-- some wierd unity bug/system problem
+        _locomation.MoveCamera(transform, _playerCamera);
+        _locomation.MovePlayer(transform, dir.normalized, speed);
+        _locomation.JumpPlayer(transform);
     }
 
     private ElementComboContens FindElementComboContens()
@@ -165,9 +163,9 @@ public class PlayerController : MonoBehaviour
                 case ElementType.NoneID:
                     break;
             }
-            if (DataManager.ComboList[i] != ElementType.NoneID && i < DataManager.ComboList.Length-1) combo += ", ";
+            if (DataManager.ComboList[i] != ElementType.NoneID) combo += ", ";
         }
-        combo = combo.Remove(combo.Length-2, 2);
+        combo = combo.Remove(combo.Length-2, 2); //removes too much
         combo += "\"";
         return combo;
     }

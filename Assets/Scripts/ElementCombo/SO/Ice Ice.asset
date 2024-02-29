@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d857a5a79982444b19015c8881ac67, type: 3}
+  m_Name: Ice Ice
+  m_EditorClassIdentifier: 
+  ElementCombo: 030000000300000000000000
+  Animation: {fileID: 0}
+  WhenToSpawn: 1
+  Contens:
+  - Projectile: {fileID: 1441847678670431627, guid: f175aad44ef3d824f93cd4c58e550994,
+      type: 3}
+    Hand: 1
+    Amount: 3
+    DelayTimerInSec: 0.1
+  - Projectile: {fileID: 1441847678670431627, guid: f175aad44ef3d824f93cd4c58e550994,
+      type: 3}
+    Hand: 2
+    Amount: 3
+    DelayTimerInSec: 0.1
