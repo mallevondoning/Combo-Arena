@@ -7,4 +7,5 @@ using UnityEngine.UI;
 public class Element : ScriptableObject
 {
     public Sprite ElementSprite;
+    public Color BorderColor;
 }

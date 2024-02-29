@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
 
     private int _listPos = 0;
 
-    private float moveX;
-    private float moveZ;
     private float speed = 15f;
 
     //<update> move to option
@@ -77,12 +75,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        moveX = Input.GetAxisRaw("Horizontal");
-        moveZ = Input.GetAxisRaw("Vertical");
-        Vector3 dir = transform.forward * moveZ + transform.right * moveX;
-
         _locomation.MoveCamera(transform, _playerCamera);
-        _locomation.MovePlayer(transform, dir.normalized, speed);
+        _locomation.MovePlayer(transform, speed);
         _locomation.JumpPlayer(transform);
     }
 

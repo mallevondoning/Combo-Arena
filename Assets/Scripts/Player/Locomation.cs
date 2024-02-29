@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
-using UnityEngine.Rendering.Universal.Internal;
 
 public class Locomation
 {
@@ -25,13 +23,18 @@ public class Locomation
         cameraTransform.localRotation = Quaternion.Euler(yRot, 0, 0);
     }
 
-    public void MovePlayer(Transform playerTransform, Vector3 normalizedDir, float speed)
+    public void MovePlayer(Transform playerTransform, float speed)
     {
         Rigidbody rb = playerTransform.GetComponent<Rigidbody>();
 
-        normalizedDir *= speed;
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveZ = Input.GetAxisRaw("Vertical");
+        Vector3 dir = playerTransform.forward * moveZ + playerTransform.right * moveX;
 
-        rb.AddForce(normalizedDir, ForceMode.Force);
+        dir = dir.normalized;
+        dir *= speed;
+
+        rb.AddForce(dir, ForceMode.Force);
     }
 
     public void JumpPlayer(Transform playerTransform)

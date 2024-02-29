@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badc2c68fe56e484289dabbe26f7c5b9, type: 3}
   m_Name: Fire
   m_EditorClassIdentifier: 
-  ElementSprite: {fileID: -2029731479, guid: a28272517748c8f43a7a3b46b724702a, type: 3}
+  ElementSprite: {fileID: 269822701, guid: 996037cfe40c5cf44bec3320bb542b26, type: 3}
+  BorderColor: {r: 0.56, g: 0.1736, b: 0.1736, a: 1}

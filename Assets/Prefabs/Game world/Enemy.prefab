@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 2959564180899336331}
-  _healthBarImg: {fileID: 0}
+  _healthBarImg: {fileID: 2308744939664338820}
   _fireBarImg: {fileID: 6768691235074578136}
   _lightingBarImg: {fileID: 554957614189673667}
   _iceBarImg: {fileID: 5129926078140450139}
