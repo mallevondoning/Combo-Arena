@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float _health = 100;
+    private float _mHealth;
+
+
+    private void Awake()
     {
-        
+        _mHealth = _health;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        _health = Mathf.Clamp(_health, 0,_mHealth);
+    }
+
+    public float GetHealth()
+    {
+        return _health;
+    }
+    public float GetMaxHealth()
+    {
+        return _mHealth;
+    }
+    public bool IsDead()
+    {
+        return _health < 0;
     }
 }
