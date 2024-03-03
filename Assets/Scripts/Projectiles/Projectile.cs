@@ -9,7 +9,6 @@ public class Projectile : ScriptableObject
 {
     [Header("Enum")]
     public List<ElementType> InflictElementList = new List<ElementType>();
-    public ProjectileSize ProjectileSize = ProjectileSize.NoneID;
     public BulletTeam BulletTeam = BulletTeam.NoneID;
 
     [Header("UnityEvents")] //<-- change to a tag system

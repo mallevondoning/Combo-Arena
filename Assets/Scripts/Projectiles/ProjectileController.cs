@@ -7,28 +7,8 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] private Projectile _projectileData;
     [SerializeField] private Rigidbody _rb;
 
-    private Transform[] _sizeObject = new Transform[3];
-
     private void Awake()
     {
-        for (int i = 0; i < transform.childCount; i++) _sizeObject[i] = transform.GetChild(i);
-
-        switch (_projectileData.ProjectileSize)
-        {
-            case ProjectileSize.Small:
-                _sizeObject[0].gameObject.SetActive(true);
-                break;
-            case ProjectileSize.Medium:
-                _sizeObject[1].gameObject.SetActive(true);
-                break;
-            case ProjectileSize.Large:
-                _sizeObject[2].gameObject.SetActive(true);
-                break;
-            case ProjectileSize.NoneID:
-                Debug.Log("No Size Set");
-                break;
-        }
-
         _projectileData.Init();
 
         _projectileData.CreateBullet.Invoke();
@@ -71,5 +51,10 @@ public class ProjectileController : MonoBehaviour
         }
 
         if (destroyCheck) Destroy(gameObject); /*<--- Give more context*/
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Current projectile collider is not a trigger");
     }
 }
