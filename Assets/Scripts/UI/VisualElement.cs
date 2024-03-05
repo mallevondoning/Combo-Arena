@@ -5,13 +5,24 @@ using UnityEngine.UI;
 
 public class VisualElement : MonoBehaviour
 {
-    [SerializeField] private Element _element;
+    public Element Element { get; set; } = null;
+
     [SerializeField] private Image _elementImage;
     [SerializeField] private Image _borderImage;
 
     private void OnValidate()
     {
-        _elementImage.sprite = _element.ElementSprite;
-        _borderImage.color = _element.BorderColor;
+        if (Element == null) return;
+ 
+        _elementImage.sprite = Element.ElementSprite;
+        _borderImage.color = Element.BorderColor;
+    }
+
+    private void Update()
+    {
+        if (Element == null) return;
+
+        _elementImage.sprite = Element.ElementSprite;
+        _borderImage.color = Element.BorderColor;
     }
 }

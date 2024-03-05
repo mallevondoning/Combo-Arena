@@ -85,7 +85,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7973412669515673573}
   - component: {fileID: 9017912169606820531}
-  - component: {fileID: 711940766273482500}
   - component: {fileID: 1713716101623802966}
   m_Layer: 5
   m_Name: Border
@@ -112,7 +111,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -2, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9017912169606820531
 CanvasRenderer:
@@ -122,21 +121,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2162492491164007139}
   m_CullTransparentMesh: 1
---- !u!114 &711940766273482500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2162492491164007139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ee2ea7eebe84d47b1284f54c19d3b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _element: {fileID: 11400000, guid: 542c075b7170c5447a9d3d41dfb0d520, type: 2}
-  _elementImage: {fileID: 396570368880278223}
-  _borderImage: {fileID: 1713716101623802966}
 --- !u!114 &1713716101623802966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.56, g: 0.1736, b: 0.1736, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -232,7 +216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 269822701, guid: 996037cfe40c5cf44bec3320bb542b26, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -302,7 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9ee2ea7eebe84d47b1284f54c19d3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _element: {fileID: 11400000, guid: 542c075b7170c5447a9d3d41dfb0d520, type: 2}
   _elementImage: {fileID: 396570368880278223}
   _borderImage: {fileID: 1713716101623802966}
 --- !u!95 &8200961636711272641

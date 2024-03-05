@@ -13,8 +13,8 @@ public class Locomation
 
     public void MoveCamera(Transform playerTransform, Transform cameraTransform)
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * DataManager.senX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * DataManager.senY;
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * DataManager.SenX;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * DataManager.SenY;
 
         yRot -= mouseY;
         yRot = Mathf.Clamp(yRot, -90f, 90f);

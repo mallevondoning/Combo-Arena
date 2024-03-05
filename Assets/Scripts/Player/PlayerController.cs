@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,8 +15,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animation _anim;
 
     private Locomation _locomation = new Locomation();
-
-    private int _listPos = 0;
 
     private float speed = 15f;
 
@@ -33,8 +32,8 @@ public class PlayerController : MonoBehaviour
 
         senX = senY = sensitivity;
         DataManager.Sensitvity = sensitivity;
-        DataManager.senX = senX;
-        DataManager.senY = senY;
+        DataManager.SenX = senX;
+        DataManager.SenY = senY;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -42,21 +41,22 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(1)) _listPos++;
+        if (InputManager.Instance.Element1Down() || InputManager.Instance.Element2Down() || InputManager.Instance.Element3Down()) DataManager.SetCurrentElement++;
         
-        if (_listPos > 3)
+        if (DataManager.SetCurrentElement > 3)
         {
-            _listPos = 1;
+            DataManager.SetCurrentElement = 1;
+            DataManager.HasResetElement = true;
             Array.Fill(DataManager.ComboList, ElementType.NoneID);
         }
 
         //<update> make this more general
-        if (Input.GetKeyDown(KeyCode.Q)) DataManager.ComboList[_listPos - 1] = ElementType.fire;
-        if (Input.GetKeyDown(KeyCode.E)) DataManager.ComboList[_listPos - 1] = ElementType.lighting;
-        if (Input.GetMouseButtonDown(1)) DataManager.ComboList[_listPos - 1] = ElementType.ice;
+        if (InputManager.Instance.Element1Down()) DataManager.ComboList[DataManager.SetCurrentElement - 1] = ElementType.fire;
+        if (InputManager.Instance.Element2Down()) DataManager.ComboList[DataManager.SetCurrentElement - 1] = ElementType.lighting;
+        if (InputManager.Instance.Element3Down()) DataManager.ComboList[DataManager.SetCurrentElement - 1] = ElementType.ice;
         //</update>
 
-        if (Input.GetMouseButtonDown(0) && !_isCoActive)
+        if (InputManager.Instance.ConfirmDown() && !_isCoActive)
         {
             if (DataManager.ComboList[0] != ElementType.NoneID)
             {
@@ -68,7 +68,8 @@ public class PlayerController : MonoBehaviour
             }
             else Debug.Log("No element has selected");
 
-            _listPos = 0;
+            DataManager.SetCurrentElement = 0;
+            DataManager.AmountFilledAfterReset = DataManager.GetTotalComboFilled();
             Array.Fill(DataManager.ComboList, ElementType.NoneID);
         }
     }
