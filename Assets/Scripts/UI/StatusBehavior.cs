@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,9 @@ public class StatusBehavior : MonoBehaviour
     [SerializeField][Range(0, 1)] private float _shakeThershold = 0.9f;
 
     private float _normFunc;
+
+    private float _moveSpeed;
+    private float _shakeSpeed;
 
     private void Awake()
     {

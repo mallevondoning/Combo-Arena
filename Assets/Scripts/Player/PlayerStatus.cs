@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game/Manager/PlayerHealth")]
@@ -18,6 +17,14 @@ public class PlayerStatus : ScriptableObject
     public float NormHealth()
     {
         return Norm(Health, MaxHealth);
+    }
+    public float NormHealth(float threshold)
+    {
+        return Norm(Health, MaxHealth, threshold);
+    }
+    public float NormHealth(float maxThreshold,float minThreshold)
+    {
+        return Norm(Health, MaxHealth, maxThreshold, minThreshold);
     }
     public bool IsDead()
     {
@@ -67,14 +74,14 @@ public class PlayerStatus : ScriptableObject
 
     private float Norm(float current, float max)
     {
-        return current / max;
+        return Mathf.Clamp01(current / max);
     }
     private float Norm(float current, float max, float threshold)
     {
         threshold = Mathf.Clamp01(threshold);
 
         float newThreshold = max * threshold;
-        return Mathf.Clamp01(Norm(current, newThreshold));
+        return Norm(current, newThreshold);
     }
     private float Norm(float current, float max, float maxThreshold, float minThreshold)
     {
@@ -86,6 +93,6 @@ public class PlayerStatus : ScriptableObject
 
         float newThreshold = newMax - newMin;
 
-        return Mathf.Clamp01(Norm(current, newThreshold));
+        return Norm(current, newThreshold);
     }
 }

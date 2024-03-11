@@ -17,7 +17,7 @@ public class ElementController : MonoBehaviour
     {
         if (DataManager.HasResetElement || InputManager.Instance.ConfirmDown())
         {
-            if (InputManager.Instance.ConfirmDown() && DataManager.AmountFilledAfterReset > 0) //<== activate when combo list has content in it
+            if (InputManager.Instance.ConfirmDown() && DataManager.AmountFilledAfterReset > 0)
             {
                 for (int i = 0; i < DataManager.AmountFilledAfterReset; i++) _elementAnimators[i].SetTrigger("Active");
                 _containerAnimator.SetTrigger("Active");
