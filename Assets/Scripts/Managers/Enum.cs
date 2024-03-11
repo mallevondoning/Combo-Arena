@@ -10,6 +10,14 @@ public enum ElementType
     ice = 3,
 }
 
+public enum StatusElementType
+{
+    NoneID = 0,
+    Ablaze = 1,
+    Shocked = 2,
+    Frozen = 3,
+}
+
 public enum BulletTeam
 {
     NoneID = 0,
