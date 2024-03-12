@@ -580,7 +580,9 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  _shakeThershold: 0.9
+  _shakeThershold: 0.85
+  _maxShakeSpeed: 25
+  _maxShakeMagnitude: 35
 --- !u!1 &281725587
 GameObject:
   m_ObjectHideFlags: 0
