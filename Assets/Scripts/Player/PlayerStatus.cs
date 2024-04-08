@@ -6,6 +6,10 @@ public class PlayerStatus : ScriptableObject
     [Header("Health")]
     public float Health = 100f;
     public float MaxHealth = 100f;
+    [Header("Exp")]
+    public float Exp;
+    public float MaxExp = 100;
+    public int Level = 1;
     [Header("Element status")]
     public float Ablaze;
     public float MaxAblaze = 100f;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class StatusBehavior : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private Image _img;
+    [SerializeField] private CanvasGroup _cg;
     [SerializeField] private Rigidbody2D _rb;
 
     [Header("Status components")]
@@ -14,6 +14,8 @@ public class StatusBehavior : MonoBehaviour
     [SerializeField] private Gradient _statusGradient;
 
     [Header("Varibles")]
+    [SerializeField][Range(0, 360)] private float _moveAngleInDegrees;
+    [SerializeField] private float _maxMoveSpeed = 30;
     [SerializeField][Range(0, 1)] private float _shakeThershold = 0.9f;
     [SerializeField] private float _maxShakeSpeed = 25;
     [SerializeField] private float _maxShakeMagnitude = 35;
@@ -22,8 +24,6 @@ public class StatusBehavior : MonoBehaviour
 
     private float _normAlpha;
     private float _normShake;
-
-    private float _moveSpeed;
 
     private void Awake()
     {
@@ -34,14 +34,13 @@ public class StatusBehavior : MonoBehaviour
     {
         FindElement(_statusType);
 
-        _img.color = _statusGradient.Evaluate(_normAlpha);
+        _cg.alpha = _statusGradient.Evaluate(_normAlpha).a; //<== double check
+    }
 
-        if (_img.color.a > _shakeThershold) Shake();
-        else
-        {
-            transform.position = startPos;
-            Move();
-        }
+    private void FixedUpdate()
+    {
+        if (_cg.alpha > _shakeThershold) Shake();
+        //else Move();
     }
 
     private void FindElement(StatusElementType statusType)
@@ -54,18 +53,21 @@ public class StatusBehavior : MonoBehaviour
                 break;
             case StatusElementType.Shocked:
                 _normAlpha = GameManager.Instance.PlayerStatus.NormShocked(_shakeThershold, true);
-                _normShake = GameManager.Instance.PlayerStatus.NormAblaze(_shakeThershold, false);
+                _normShake = GameManager.Instance.PlayerStatus.NormShocked(_shakeThershold, false);
                 break;
             case StatusElementType.Frozen:
                 _normAlpha = GameManager.Instance.PlayerStatus.NormFrozen(_shakeThershold, true);
-                _normShake = GameManager.Instance.PlayerStatus.NormAblaze(_shakeThershold, false);
+                _normShake = GameManager.Instance.PlayerStatus.NormFrozen(_shakeThershold, false);
                 break;
         }
     }
 
-    private Vector2 Move()
+    private void Move()
     {
-        return Vector2.zero;
+        Vector3 dir = new Vector3(Mathf.Cos(Mathf.Deg2Rad * _moveAngleInDegrees), Mathf.Sin(Mathf.Deg2Rad * _moveAngleInDegrees),0);
+        float moveSpeed = Mathf.Lerp(_maxMoveSpeed, 0, _normAlpha);
+
+        _rb.velocity = dir * moveSpeed;
     }
     private void Shake()
     {
@@ -75,8 +77,8 @@ public class StatusBehavior : MonoBehaviour
         float shakeSpeed = Mathf.Lerp(0, _maxShakeSpeed, _normShake);
         float shakeMagnitude = Mathf.Lerp(0, _maxShakeMagnitude, _normShake);
 
-        float shakeX = startPos.x + Mathf.Sin((Time.time + perlinX) * shakeSpeed) * shakeMagnitude;
-        float shakeY = startPos.y + Mathf.Sin((Time.time + perlinY) * shakeSpeed) * shakeMagnitude;
+        float shakeX = startPos.x + (Mathf.Sin((Time.time + perlinX) * shakeSpeed) * shakeMagnitude);
+        float shakeY = startPos.y + (Mathf.Sin((Time.time + perlinY) * shakeSpeed) * shakeMagnitude);
         transform.position = new Vector2(shakeX, shakeY);
     }
 }
