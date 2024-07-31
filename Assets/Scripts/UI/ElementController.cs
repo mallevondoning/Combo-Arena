@@ -8,7 +8,6 @@ public class ElementController : MonoBehaviour
     public VisualElement[] ElementUI = new VisualElement[3];
     [SerializeField] private List<Element> _elementTypes = new List<Element>();
     [Header("Animation")]
-    [SerializeField] private Animator _containerAnimator;
     [SerializeField] private Animator[] _elementAnimators = new Animator[3];
 
     private int _currentPos = -1;
@@ -20,7 +19,6 @@ public class ElementController : MonoBehaviour
             if (InputManager.Instance.ConfirmDown() && DataManager.AmountFilledAfterReset > 0)
             {
                 for (int i = 0; i < DataManager.AmountFilledAfterReset; i++) _elementAnimators[i].SetTrigger("Active");
-                _containerAnimator.SetTrigger("Active");
 
                 DataManager.AmountFilledAfterReset = 0;
                 _currentPos = SetCurrentPos();
@@ -28,11 +26,6 @@ public class ElementController : MonoBehaviour
             else if (DataManager.HasResetElement)
             {
                 for (int i = 0; i < _elementAnimators.Length; i++) _elementAnimators[i].SetTrigger("Discard");
-            }
-
-            for (int i = 0; i < ElementUI.Length; i++)
-            {
-                ElementUI[i].Element = _elementTypes[0];
             }
 
             DataManager.HasResetElement = false;

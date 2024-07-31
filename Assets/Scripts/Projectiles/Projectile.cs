@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Events;
 using UnityEngine;
-using Unity.VisualScripting;
 
 [CreateAssetMenu(menuName = "Game/World/Projectile")]
 public class Projectile : ScriptableObject
@@ -11,8 +8,8 @@ public class Projectile : ScriptableObject
     public List<ElementType> InflictElementList = new List<ElementType>();
     public BulletTeam BulletTeam = BulletTeam.NoneID;
 
-    [Header("UnityEvents")] //<-- change to a tag system
-    public UnityEvent CreateBullet = new UnityEvent();
+    [Header("Effects")]
+    public ProjectileEffects CreateBullet = new ProjectileEffects();
     public ProjectileModifier HitGround = new ProjectileModifier();
     public ProjectileModifier HitEnemy = new ProjectileModifier();
     public ProjectileModifier HitBullet = new ProjectileModifier();
@@ -25,24 +22,5 @@ public class Projectile : ScriptableObject
     public bool HasKnockback = false;
     public float KnockbackForce = 0;
 
-    public void Init()
-    {
-        CreateBullet.AddListener(CreateBulletFunc);
-        HitGround.ModfilerEvent.AddListener(HitGroundFunc);
-        HitEnemy.ModfilerEvent.AddListener(HitEnemyFunc);
-        HitBullet.ModfilerEvent.AddListener(HitBulletFunc);
-    }
-
-    protected virtual void CreateBulletFunc()
-    {
-    }
-    protected virtual void HitGroundFunc()
-    {
-    }
-    protected virtual void HitEnemyFunc()
-    {
-    }
-    protected virtual void HitBulletFunc()
-    {
-    }
+    public void Init() { }
 }

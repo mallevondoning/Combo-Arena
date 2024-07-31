@@ -16,6 +16,11 @@ public class InputManager : MonoBehaviour
         Instance = this;
     }
 
+    public bool CloseGame()
+    {
+        return Input.GetKeyDown(KeyCode.Escape);
+    }
+
     //add input element 1
     public bool Element1()
     {

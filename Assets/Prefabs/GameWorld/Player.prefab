@@ -127,7 +127,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4145675879677797512}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6ca9c2825702a114c9b964cac2f90d90, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -189,6 +189,30 @@ MonoBehaviour:
   - {fileID: 7755190423041550477}
   - {fileID: 7550800219233961632}
   _anim: {fileID: 4677292676367957474}
+  _jumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   sensitivity: 600
 --- !u!111 &4677292676367957474
 Animation:
@@ -402,7 +426,7 @@ PrefabInstance:
     - target: {fileID: 57722294691692849, guid: 7283569e1006f87418504e20cbd8bfdf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7
+      value: 0.57
       objectReference: {fileID: 0}
     - target: {fileID: 57722294691692849, guid: 7283569e1006f87418504e20cbd8bfdf,
         type: 3}
@@ -502,7 +526,7 @@ PrefabInstance:
     - target: {fileID: 57722294691692849, guid: 7283569e1006f87418504e20cbd8bfdf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.7
+      value: -0.57
       objectReference: {fileID: 0}
     - target: {fileID: 57722294691692849, guid: 7283569e1006f87418504e20cbd8bfdf,
         type: 3}

@@ -10,10 +10,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private List<Transform> _muzzleList;
     [SerializeField] private Animation _anim;
+    [SerializeField] private AnimationCurve _jumpCurve;
 
     private Locomation _locomation = new Locomation();
 
-    private float speed = 15f;
+    private float speed = 10f;
 
     //<update> move to option
     [SerializeField] private float sensitivity = 600f;
@@ -69,13 +70,16 @@ public class PlayerController : MonoBehaviour
             DataManager.AmountFilledAfterReset = DataManager.GetTotalComboFilled();
             Array.Fill(DataManager.ComboList, ElementType.NoneID);
         }
+
+        _locomation.MoveCamera(transform, _playerCamera);
+        _locomation.JumpPlayer(this, transform);
+
+        Close(); //<--- testing purpose
     }
 
     private void FixedUpdate()
     {
-        _locomation.MoveCamera(transform, _playerCamera);
         _locomation.MovePlayer(transform, speed);
-        _locomation.JumpPlayer(transform);
     }
 
     private ElementComboContens FindElementComboContens()
@@ -136,6 +140,12 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+    public AnimationCurve GetJumpCurve()
+    {
+        return _jumpCurve;
+    }
+
+    //Debug what the combo is
     private string DebugCombo()
     {
         string combo = "\"";
@@ -157,8 +167,18 @@ public class PlayerController : MonoBehaviour
             }
             if (DataManager.ComboList[i] != ElementType.NoneID) combo += ", ";
         }
-        combo = combo.Remove(combo.Length-2, 2); //removes too much
+        combo = combo.Remove(combo.Length-2, 2);
         combo += "\"";
         return combo;
+    }
+
+    //Fast exit for builds debug
+    private void Close()
+    {
+        if (InputManager.Instance.CloseGame())
+        {
+            Debug.Log("Closed game");
+            Application.Quit();
+        }
     }
 }

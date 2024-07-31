@@ -1,0 +1,3 @@
+Ablaze: Become faster but take damage over time
+Frozen: Become take less damage/heal but can't move but can look
+Shocked: Temporary disable movement multiple times the more you move the more damage the next use.

@@ -13,26 +13,21 @@ MonoBehaviour:
   m_Name: T1_fire
   m_EditorClassIdentifier: 
   InflictElementList: 01000000
-  ProjectileSize: 3
   BulletTeam: 1
   CreateBullet:
-    m_PersistentCalls:
-      m_Calls: []
+    _effectTypeList: 
   HitGround:
     DestroyOnContact: 1
     ModfilerEvent:
-      m_PersistentCalls:
-        m_Calls: []
+      _effectTypeList: 01000000
   HitEnemy:
     DestroyOnContact: 1
     ModfilerEvent:
-      m_PersistentCalls:
-        m_Calls: []
+      _effectTypeList: 
   HitBullet:
     DestroyOnContact: 0
     ModfilerEvent:
-      m_PersistentCalls:
-        m_Calls: []
+      _effectTypeList: 
   Damage: 10
   Speed: 25
   UseGravity: 1

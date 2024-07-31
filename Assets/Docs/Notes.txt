@@ -1,0 +1,11 @@
+unity editor stutter
+add knockback force to player <--- test it
+
+update jump
+
+add mroe bullet effects
+
+start concepting combos
+
+work with enemy controller
+work with enemy brain(s)

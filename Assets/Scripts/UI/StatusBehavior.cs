@@ -20,15 +20,8 @@ public class StatusBehavior : MonoBehaviour
     [SerializeField] private float _maxShakeSpeed = 25;
     [SerializeField] private float _maxShakeMagnitude = 35;
 
-    private Vector3 startPos;
-
     private float _normAlpha;
     private float _normShake;
-
-    private void Awake()
-    {
-        startPos = transform.position;
-    }
 
     private void Update()
     {
@@ -77,8 +70,8 @@ public class StatusBehavior : MonoBehaviour
         float shakeSpeed = Mathf.Lerp(0, _maxShakeSpeed, _normShake);
         float shakeMagnitude = Mathf.Lerp(0, _maxShakeMagnitude, _normShake);
 
-        float shakeX = startPos.x + (Mathf.Sin((Time.time + perlinX) * shakeSpeed) * shakeMagnitude);
-        float shakeY = startPos.y + (Mathf.Sin((Time.time + perlinY) * shakeSpeed) * shakeMagnitude);
-        transform.position = new Vector2(shakeX, shakeY);
+        float shakeX = (Mathf.Sin((Time.time + perlinX) * shakeSpeed) * shakeMagnitude);
+        float shakeY = (Mathf.Sin((Time.time + perlinY) * shakeSpeed) * shakeMagnitude);
+        transform.localPosition = new Vector2(shakeX, shakeY);
     }
 }

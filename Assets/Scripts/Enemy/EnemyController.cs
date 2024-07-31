@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] private Transform _headTrans;
+    [SerializeField] private float _lookDist = 15;
+
     [SerializeField] private float _health = 100;
     private float _mHealth;
 
@@ -16,6 +19,19 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         _health = Mathf.Clamp(_health, 0,_mHealth);
+
+        if (Vector3.Distance(transform.position,GameManager.Instance.Player.transform.position) < _lookDist) LookAtPlayer(); //update so distance scales where you stand
+        else LookAtNeutral();
+    }
+
+    private void LookAtPlayer()
+    {
+        //add clamps
+        _headTrans.LookAt(GameManager.Instance.Player.transform,Vector3.up);
+    }
+    private void LookAtNeutral()
+    {
+        _headTrans.LookAt(transform.forward, Vector3.up);
     }
 
     public float GetHealth()

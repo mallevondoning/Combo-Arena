@@ -17,6 +17,7 @@ MonoBehaviour:
   Exp: 0
   MaxExp: 100
   Level: 1
+  Ablaze: 0
   MaxAblaze: 100
   Shocked: 0
   MaxShocked: 100

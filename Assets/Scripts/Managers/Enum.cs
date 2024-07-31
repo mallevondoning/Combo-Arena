@@ -22,8 +22,11 @@ public enum BulletTeam
 {
     NoneID = 0,
     Frendly = 1,
-    Hostile = 2,
-    Neutral = 3,
+    Axithorns = 2,
+    Sumbarchs = 3,
+    Quaxilix = 4,
+    Rennchons = 5,
+    Neutral = 6,
 }
 
 public enum Hand

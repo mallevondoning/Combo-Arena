@@ -18,6 +18,33 @@ public class PlayerStatus : ScriptableObject
     public float Frozen;
     public float MaxFrozen = 100f;
 
+    private void OnValidate()
+    {
+        Exp = Mathf.Max(0, Exp);
+        Level = Mathf.Clamp(Level, 1, 9999);
+
+        Ablaze = Mathf.Max(0, Ablaze);
+        Shocked = Mathf.Max(0, Shocked);
+        Frozen = Mathf.Max(0, Frozen);
+    }
+
+    public float NormExp()
+    {
+        return Norm(Exp, MaxExp, 0);
+    }
+    public float NormExp(float threshold, bool isMax)
+    {
+        return Norm(Exp, MaxExp, threshold, isMax);
+    }
+    public float NormExp(float maxThreshold, float minThreshold)
+    {
+        return Norm(Exp, MaxExp, maxThreshold, minThreshold);
+    }
+    public void ExpCalc()
+    {
+        //MaxExp = <--- exp curve
+    }
+
     public float NormHealth()
     {
         return Norm(Health, MaxHealth, 0);

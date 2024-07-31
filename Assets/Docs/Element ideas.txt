@@ -10,4 +10,4 @@ wind
 sand
 toys
 food
-desise
+disease
