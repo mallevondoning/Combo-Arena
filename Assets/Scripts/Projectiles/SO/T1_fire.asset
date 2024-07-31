@@ -15,21 +15,36 @@ MonoBehaviour:
   InflictElementList: 01000000
   BulletTeam: 1
   CreateBullet:
-    _effectTypeList: 
+    _effets: []
   HitGround:
     DestroyOnContact: 1
     ModfilerEvent:
-      _effectTypeList: 01000000
+      _effets:
+      - rid: 8115603265303085057
   HitEnemy:
     DestroyOnContact: 1
     ModfilerEvent:
-      _effectTypeList: 
+      _effets: []
   HitBullet:
     DestroyOnContact: 0
     ModfilerEvent:
-      _effectTypeList: 
-  Damage: 10
+      _effets: []
   Speed: 25
   UseGravity: 1
-  HasKnockback: 0
-  KnockbackForce: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 8115603265303085057
+      type: {class: ProjectileExplosion, ns: , asm: Assembly-CSharp}
+      data:
+        _damage: 10
+        _knockback: 0
+        _knockbackForce: 0
+        _range: 0
+        _ease:
+          rid: 8115603360054509569
+    - rid: 8115603360054509569
+      type: {class: Linear, ns: , asm: Assembly-CSharp}
+      data:
+        _maxRange: 1
+        _minRange: 0

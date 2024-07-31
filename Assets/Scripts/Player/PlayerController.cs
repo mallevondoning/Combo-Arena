@@ -82,6 +82,11 @@ public class PlayerController : MonoBehaviour
         _locomation.MovePlayer(transform, speed);
     }
 
+    public void AddKnockback(float knockbackForce,Vector3 hitPos,float range)
+    {
+        _playerRigidbody.AddExplosionForce(knockbackForce, hitPos, range);
+    }
+
     private ElementComboContens FindElementComboContens()
     {
         List<ElementComboContens> ECCList = ElementComboManager.Instance.ECContens;
@@ -170,6 +175,15 @@ public class PlayerController : MonoBehaviour
         combo = combo.Remove(combo.Length-2, 2);
         combo += "\"";
         return combo;
+    }
+
+    public void TakeDamage(float value)
+    {
+        GameManager.Instance.PlayerStatus.Health -= value;
+    }
+    public void Heal(float value)
+    {
+        GameManager.Instance.PlayerStatus.Health += value;
     }
 
     //Fast exit for builds debug

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [Header("Components")]
+    [SerializeField] private Rigidbody _enemyRigibody;
+    [SerializeField] private BulletTeam _bulletTeam;
+
+    [Header("Head")]
     [SerializeField] private Transform _headTrans;
     [SerializeField] private float _lookDist = 15;
 
@@ -22,6 +27,14 @@ public class EnemyController : MonoBehaviour
 
         if (Vector3.Distance(transform.position,GameManager.Instance.Player.transform.position) < _lookDist) LookAtPlayer(); //update so distance scales where you stand
         else LookAtNeutral();
+    private void FixedUpdate()
+    {
+        //_enemyRigibody.velocity;
+    }
+
+    public void AddKnockback(float knockbackForce, Vector3 hitPos, float range)
+    {
+        _enemyRigibody.AddExplosionForce(knockbackForce, hitPos, range);
     }
 
     private void LookAtPlayer()

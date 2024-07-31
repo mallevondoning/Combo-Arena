@@ -15,12 +15,17 @@ public class Projectile : ScriptableObject
     public ProjectileModifier HitBullet = new ProjectileModifier();
 
     [Header("Basic")]
-    public float Damage = 10;
     public float Speed = 15;
     public bool UseGravity = false;
-    [Header("Knockback")]
-    public bool HasKnockback = false;
-    public float KnockbackForce = 0;
+
+    private Vector3 _hitPos;
 
     public void Init() { }
+
+    public void Hit(Vector3 hitPos)
+    {
+        HitGround.ModfilerEvent.Init(_hitPos, BulletTeam);
+        HitEnemy.ModfilerEvent.Init(_hitPos, BulletTeam);
+        HitBullet.ModfilerEvent.Init(_hitPos, BulletTeam);
+    }
 }

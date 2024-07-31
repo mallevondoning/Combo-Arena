@@ -13,7 +13,7 @@ public class ProjectileController : MonoBehaviour
     {
         _projectileData.Init();
 
-        //_projectileData.CreateBullet.OnHit(); <--- needs to be fixed... how... IDK???????
+        _projectileData.CreateBullet.OnHit();
         _rb.useGravity = _projectileData.UseGravity;
        
         _startPos = transform.position;
@@ -43,10 +43,12 @@ public class ProjectileController : MonoBehaviour
         EnemyController hitEnemyEvent = collision.gameObject.GetComponent<EnemyController>();
         ProjectileController hitBulletEvent = collision.gameObject.GetComponent<ProjectileController>();
 
+        _projectileData.Hit(transform.position);
+
         bool destroyCheck = false;
         if (hitGroundEvent == collisionMask)
         {
-            _projectileData.HitGround.ModfilerEvent.OnHit(); 
+            _projectileData.HitGround.ModfilerEvent.OnHit();
             destroyCheck = _projectileData.HitGround.DestroyOnContact;
         }
         else if (hitEnemyEvent != null)

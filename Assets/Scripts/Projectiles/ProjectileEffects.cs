@@ -6,15 +6,26 @@ using UnityEngine;
 [Serializable]
 public class ProjectileEffects
 {
-    public ProjectileEffects Effect;
+    [SerializeReference, SerializeReferenceButton] private IProjectileEffets[] _effets;
 
-    protected virtual void SelfDestroy()
+    private Vector3 _hitPos;
+    private BulletTeam _bulletTeam;
+
+    public void Init(Vector3 hitPos, BulletTeam bulletTeam)
     {
-        //Physics.Raycast();
+        _hitPos = hitPos;
+        _bulletTeam = bulletTeam;
     }
 
-    public virtual void OnHit()
+    public void OnHit()
     {
+        for (int i = 0; i < _effets.Length; i++)
+        {
+            if (_effets[i] != null) continue;
 
+            _effets[i].Init(_hitPos, _bulletTeam);
+
+            _effets[i].Action();
+        }
     }
 }
