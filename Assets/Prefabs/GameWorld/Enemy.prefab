@@ -378,6 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d0a559a73bf7f4c973166fbcce73f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyRigibody: {fileID: 4837847245795512663}
   _headTrans: {fileID: 8806572524293869407}
   _lookDist: 15
   _health: 100
@@ -677,7 +678,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 0.612
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6388665870263137760
